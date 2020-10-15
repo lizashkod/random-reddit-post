@@ -1,0 +1,12 @@
+@import '../../styles/constants.scss';
+
+.list-item__wrapper {
+  a {
+    font-size: $text-size;
+    color: $white;
+    text-decoration: none;
+  }
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
