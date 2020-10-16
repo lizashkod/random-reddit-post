@@ -23,7 +23,17 @@ body {
 
 .content-container {
   width: 70%;
-  margin: 10% auto;
+  margin: 5% auto;
   box-sizing: border-box;
   height: fit-content;
+}
+
+.icon {
+  cursor: pointer;
+  path, svg {
+    transition: all 0.2s ease;
+  }
+  &_trash:hover path {
+    stroke: $red;
+  }
 }
