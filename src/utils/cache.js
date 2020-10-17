@@ -1,4 +1,4 @@
-const CACHE_TIMEOUT = 5000
+const CACHE_TIMEOUT = 1000 * 60 * 2
 
 class Cache {
   timeout = CACHE_TIMEOUT

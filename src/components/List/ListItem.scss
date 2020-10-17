@@ -2,7 +2,7 @@
 
 .list-item__wrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   a {
     font-size: $text-size;
     color: $white;
@@ -15,6 +15,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    user-select: none;
     &:hover {
       color: $yellow;
     }
