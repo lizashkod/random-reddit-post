@@ -1,3 +1,4 @@
+import undoable, { excludeAction } from 'redux-undo'
 import {
   SET_POST_LOADING,
   GET_POST_SUCCEED,
@@ -5,6 +6,8 @@ import {
   REMOVE_POST,
   TOGGLE_POST_FAVORITE,
 } from '../actions/actions'
+
+const MAX_STORE_HISTORY_LENGTH = 10
 
 const store = (state = {}, { type, payload }) => {
   switch(type) {
@@ -44,4 +47,7 @@ const store = (state = {}, { type, payload }) => {
   }
 }
 
-export default store
+export default undoable(store, {
+  filter: excludeAction(SET_POST_LOADING),
+  limit: MAX_STORE_HISTORY_LENGTH,
+})

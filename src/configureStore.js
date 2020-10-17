@@ -16,7 +16,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware)),
 )
 
-store.subscribe(() => saveState({ list: store.getState().list }))
+store.subscribe(() => saveState({ list: store.getState().present.list }))
 
 sagaMiddleware.run(saga)
 

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import { ActionCreators } from 'redux-undo'
+import { useDispatch, useSelector } from 'react-redux'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 
@@ -11,9 +12,15 @@ import './List.scss'
 const List = ({ source, loading }) => {
   const dispatch = useDispatch()
 
+  const { past, future } = useSelector(state => state)
+
   const handlePostDelete = id => dispatch(removePost(id))
 
   const handleAddPostToFavourites = id => dispatch(togglePostFavorites(id))
+
+  const handleUndoClick = () => dispatch(ActionCreators.undo())
+
+  const handleRedoClick = () => dispatch(ActionCreators.redo())
 
   const Row = ({ index, style }) => (
     <ListItem
@@ -27,6 +34,20 @@ const List = ({ source, loading }) => {
 
   return (
     <div className='list__wrapper'>
+      <div className='buttons__wrapper'>
+        <button
+          className={past.length ? '' : 'disable'}
+          onClick={handleUndoClick}
+        >
+          Undo
+        </button>
+        <button
+          className={future.length ? '' : 'disable'}
+          onClick={handleRedoClick}
+        >
+          Redo
+        </button>
+      </div>
       <div>
         <AutoSizer>
           {({height, width}) => (
@@ -35,7 +56,7 @@ const List = ({ source, loading }) => {
               width={width}
               className='list'
               itemSize={40}
-              itemCount={source.length}
+              itemCount={source?.length}
             >
               {Row}
             </FixedSizeList>

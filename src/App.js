@@ -9,7 +9,7 @@ const topics = ['Frontend', 'React', 'VueJS', 'Angular']
 
 function App() {
   const dispatch = useDispatch()
-  const { list, loading } = useSelector(state => state)
+  const { list, loading } = useSelector(state => state?.present)
 
   const handleTopicClick = topic => dispatch(getPost(topic))
 

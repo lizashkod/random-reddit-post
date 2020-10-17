@@ -1,3 +1,5 @@
+@import '../../styles/constants';
+
 .list {
   display: flex;
   flex-direction: column;
@@ -8,8 +10,37 @@
     margin-top: 3rem;
     flex: 1;
     flex-direction: column;
-    & > div:first-child {
+    & > div:nth-child(2) {
       flex: 1;
+    }
+  }
+}
+
+.buttons__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.2rem;
+    font-size: $text-size-small;
+    height: 2rem;
+    background-color: transparent;
+    color: $white;
+    transition: color .1s ease;
+    &:hover {
+      color: $yellow;
+    }
+    &.disable {
+      color: $gray;
+      &:hover {
+        color: $gray;
+      }
+    }
+    &:first-child {
+      margin-right: 0.5rem;
     }
   }
 }
