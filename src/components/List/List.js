@@ -1,13 +1,50 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import AutoSizer from 'react-virtualized-auto-sizer'
+import { FixedSizeList } from 'react-window'
 
+import { removePost, togglePostFavorites } from '../../actions/actionCreators'
 import ListItem from './ListItem'
+import Spinner from '../Spinner/Spinner'
 import './List.scss'
 
-const List = ({ source = [1, 2, 3, 4, 5, 6, 7, 8, 9] }) => (
-  <div className='list'>
-    {source?.map((article, index) =>
-      <ListItem article={article} index={index} key={`article-${index}`} />)}
-  </div>
-)
+const List = ({ source, loading }) => {
+  const dispatch = useDispatch()
+
+  const handlePostDelete = id => dispatch(removePost(id))
+
+  const handleAddPostToFavourites = id => dispatch(togglePostFavorites(id))
+
+  const Row = ({ index, style }) => (
+    <ListItem
+      style={style}
+      article={source[index]}
+      index={index}
+      onDelete={handlePostDelete}
+      onAddToFavourites={handleAddPostToFavourites}
+    />
+  )
+
+  return (
+    <div className='list__wrapper'>
+      <div>
+        <AutoSizer>
+          {({height, width}) => (
+            <FixedSizeList
+              height={height}
+              width={width}
+              className='list'
+              itemSize={40}
+              itemCount={source.length}
+            >
+              {Row}
+            </FixedSizeList>
+          )}
+        </AutoSizer>
+      </div>
+      <Spinner start={loading} />
+    </div>
+  )
+}
 
 export default List

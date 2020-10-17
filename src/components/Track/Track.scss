@@ -1,4 +1,4 @@
-@import '../../styles//constants.scss';
+@import '../../styles/constants.scss';
 
 @keyframes slide {
   from {
@@ -6,7 +6,7 @@
   }
 
   to {
-    left: 100%;
+    left: calc(100% - 10rem);
   }
 }
 

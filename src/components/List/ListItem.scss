@@ -2,19 +2,25 @@
 
 .list-item__wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   a {
     font-size: $text-size;
     color: $white;
     text-decoration: none;
     margin-left: 1rem;
     transition: color .1s ease;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
     &:hover {
       color: $yellow;
     }
-  }
-  &:not(:last-child) {
-    margin-bottom: 1rem;
+    &:visited {
+      color: #F3DECA;
+    }
   }
   & :not(:last-child) {
     margin-right: 1rem;

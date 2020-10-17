@@ -2,11 +2,11 @@ import React from 'react'
 
 import './Track.scss'
 
-const Track = ({ title, onClick, index }) => (
+const Track = ({ title, index, onTopicClick }) => (
   <div className='track'>
     <button
       className='thumb'
-      onClick={onClick}
+      onClick={onTopicClick}
       style={{ animationDuration: `${index + 3}s` }}
     >
       {title}

@@ -4,16 +4,16 @@ import * as Icon from '../icons'
 
 import './ListItem.scss'
 
-const ListItem = ({ article, index }) => (
-  <div className='list-item__wrapper'>
-    <Icon.Heart />
-    <Icon.Trash />
+const ListItem = ({ style, article, index, onAddToFavourites, onDelete }) => (
+  <div className='list-item__wrapper' style={style}>
+    <Icon.Heart isFilled={article.isFavorite} onClick={() => onAddToFavourites(article.id)} />
+    <Icon.Trash onClick={() => onDelete(article.id)} />
     <a
       rel='noopener noreferrer'
       target='_blank'
-      href={article.url || 'https://www.google.com'}
+      href={article.url}
     >
-      {article.title || `Ссылка ${index + 1}`}
+      {article.title}
     </a>
   </div>
 )

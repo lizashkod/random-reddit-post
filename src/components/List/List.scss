@@ -1,5 +1,15 @@
 .list {
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
+  outline: none;
+  overflow: scroll;
+  &__wrapper {
+    display: flex;
+    margin-top: 3rem;
+    flex: 1;
+    flex-direction: column;
+    & > div:first-child {
+      flex: 1;
+    }
+  }
 }

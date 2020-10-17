@@ -1,0 +1,8 @@
+export const SET_POST_LOADING = 'SET_POST_LOADING'
+
+export const GET_POST = 'GET_POST'
+export const GET_POST_SUCCEED = 'GET_POST_SUCCEED'
+export const GET_POST_FAILED = 'GET_POST_FAILED'
+
+export const REMOVE_POST = 'REMOVE_POST'
+export const TOGGLE_POST_FAVORITE = 'TOGGLE_POST_FAVORITE'
