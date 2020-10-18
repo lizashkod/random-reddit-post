@@ -1,12 +1,7 @@
 const CACHE_TIMEOUT = 1000 * 60 * 2
 
 class Cache {
-  timeout = CACHE_TIMEOUT
   storage = {}
-
-  get now() {
-    return (new Date()).getTime()
-  }
 
   set(key, value) {
     this._clean()
@@ -15,7 +10,7 @@ class Cache {
       ...this.storage,
       [key]: {
         value,
-        ttl: this.now + this.timeout,
+        ttl: this._now + CACHE_TIMEOUT,
       }
     }
   }
@@ -27,7 +22,11 @@ class Cache {
   isValid(key) {
     const cacheValue = this.storage[key]?.ttl
 
-    return cacheValue > this.now
+    return cacheValue > this._now
+  }
+
+  get _now() {
+    return (new Date()).getTime()
   }
 
   _clean() {

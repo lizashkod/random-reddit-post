@@ -5,7 +5,7 @@ import {
   GET_POST_FAILED,
   REMOVE_POST,
   TOGGLE_POST_FAVORITE,
-} from '../actions/actions'
+} from '../actions'
 
 const MAX_STORE_HISTORY_LENGTH = 10
 
@@ -27,7 +27,6 @@ const store = (state = {}, { type, payload }) => {
       return { ...state, loading: false }
 
     case REMOVE_POST: {
-      console.log('REMOVE')
       const newList = state.list.filter(post => post.id !== payload)
       return { ...state, list: newList }
     }
@@ -37,9 +36,8 @@ const store = (state = {}, { type, payload }) => {
 
       const targetPostIndex = newList.findIndex(post => post.id === payload)
       const targetPost = newList[targetPostIndex]
-      const newTargetPost = { ...targetPost, isFavorite: !targetPost.isFavorite }
+      newList[targetPostIndex] = { ...targetPost, isFavorite: !targetPost.isFavorite }
 
-      newList[targetPostIndex] = newTargetPost
       return { ...state, list: newList }
     }
 
