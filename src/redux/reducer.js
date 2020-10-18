@@ -27,16 +27,16 @@ const store = (state = {}, { type, payload }) => {
       return { ...state, loading: false }
 
     case REMOVE_POST: {
-      const newList = state.list.filter(post => post.id !== payload)
+      const newList = [...state.list]
+      newList.splice(payload, 1)
       return { ...state, list: newList }
     }
 
     case TOGGLE_POST_FAVORITE: {
       const newList = [...state.list]
 
-      const targetPostIndex = newList.findIndex(post => post.id === payload)
-      const targetPost = newList[targetPostIndex]
-      newList[targetPostIndex] = { ...targetPost, isFavorite: !targetPost.isFavorite }
+      const targetPost = newList[payload]
+      newList[payload] = { ...targetPost, isFavorite: !targetPost.isFavorite }
 
       return { ...state, list: newList }
     }

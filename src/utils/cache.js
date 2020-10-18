@@ -16,24 +16,24 @@ class Cache {
   }
 
   get(key) {
-    return this.storage[key].value
-  }
-
-  isValid(key) {
-    const cacheValue = this.storage[key]?.ttl
-
-    return cacheValue > this._now
+    return this._isValid(key) ? this.storage[key].value : null
   }
 
   get _now() {
     return (new Date()).getTime()
   }
 
+  _isValid(key) {
+    const cacheValue = this.storage[key]?.ttl
+
+    return cacheValue > this._now
+  }
+
   _clean() {
     const cleanedStorage = Object.keys(this.storage)
       .reduce((acc, key) => {
         const cacheValue = this.storage[key]
-        return this.isValid(key) ? { ...acc, [key]: cacheValue } : acc
+        return this._isValid(key) ? { ...acc, [key]: cacheValue } : acc
       }, {})
 
     this.storage = cleanedStorage
